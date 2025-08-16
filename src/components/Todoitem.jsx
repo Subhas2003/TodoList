@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useTodo } from '../context/TodoContext';
+import { toast } from 'react-toastify';
 
 function Todoitem({ todo }) {
     const [isEditable, setIsTodoEditable] = useState(false)
@@ -26,9 +27,9 @@ function Todoitem({ todo }) {
                 readOnly
                 // Dynamic width based on whether pasteId is present
                 className=' outline-none text-2xl text-center pb-2'
-                />
-        <div
-                className={`flex border border-black/10 rounded-lg px-3 py-1.5 gap-x-3 shadow-sm shadow-white/50 duration-300  text-black ${todo.completed ? "bg-[#c6e9a7]" : "bg-[#ccbed7]"
+            />
+            <div
+                className={`flex border border-black/10 rounded-lg px-3 py-1.5 gap-x-3 items-center shadow-sm shadow-white/50 duration-300  text-black ${todo.completed ? "bg-[#c6e9a7]" : "bg-[#ccbed7]"
                     }`}
             >
 
@@ -38,7 +39,7 @@ function Todoitem({ todo }) {
                     checked={todo.completed}
                     onChange={toggleCompleted}
                 />
-                <input
+                <textarea
                     type="text"
                     className={`border outline-none w-full bg-transparent rounded-lg ${isEditable ? "border-black/10 px-2" : "border-transparent"
                         } ${todo.completed ? "line-through" : ""}`}
@@ -54,16 +55,23 @@ function Todoitem({ todo }) {
 
                         if (isEditable) {
                             editTodo();
+                            toast('Update successfully..')
                         } else setIsTodoEditable((prev) => !prev);
+
+
                     }}
                     disabled={todo.completed}
+
                 >
                     {isEditable ? "📁" : "✏️"}
                 </button>
                 {/* Delete Todo Button */}
                 <button
                     className="inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0"
-                    onClick={() => deleteTodo(todo.id)}
+                    onClick={() => {
+                        deleteTodo(todo.id)
+                        toast('Delete successfully..')
+                    }}
                 >
                     ❌
                 </button>

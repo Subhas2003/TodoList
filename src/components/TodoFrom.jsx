@@ -15,12 +15,15 @@ function TodoForm() {
         addTodo({ todo, title, completed: false })
         setTodo("")
         settitle('')
+       
 
 
     }
 
     return (
-        <form onSubmit={add} className="flex flex-col gap-4 items-center ">
+        <form 
+        onSubmit={add}
+        className="flex flex-col gap-4 items-center ">
             <input
                 type="text"
                 placeholder="Title..."
