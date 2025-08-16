@@ -17,9 +17,8 @@ function App() {
     const intervalId = setInterval(() => {
       setCurrentDateTime(new Date());
     }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
+    // return () => clearInterval(intervalId);
+  });
 
   const updateTodo = (id, todo) => {
     settodos((prev) => prev.map((prevtodo) => (prevtodo.id === id ? todo : prevtodo)))
